@@ -934,3 +934,17 @@ registerGDPRConsent
 sendMailAlterTemplateVars
 validateCustomerFormFields
 ```
+
+To build the list of hooks, I used the following code inside a PrestaShop module:
+
+```php
+$query = (new DbQuery())
+    ->select('name')
+    ->from('hook', 'h');
+
+$results = Db::getInstance()->executeS($query);
+
+$hookNames = array_column($results, 'name');
+
+die(implode(PHP_EOL, $hookNames));
+```
